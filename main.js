@@ -130,7 +130,7 @@ function recursiva(numbersArray){
         recursiva(numbersArray);
     }
 }
-*/
+
 
 const obj1 = {
     a: "a",
@@ -143,6 +143,7 @@ const obj1 = {
         this.a = "AAAAA";
     }
 };
+*/
 
 function isObject(subject){
     return typeof subject == "object";
@@ -185,3 +186,69 @@ function deepCopy(subject){
 
     return copySubject;
 }
+/*
+const studentBase = {
+    name: undefined,
+    email: undefined,
+    age: undefined,
+    approvedCourses: undefined,
+    learninPaths: undefined,
+    socialMedia: {
+        twitter: undefined,
+        instagram: undefined,
+        facebook: undefined,
+    }
+};
+
+
+const juan = deepCopy(studentBase);
+Object.seal(juan); // protegemos las propiedads de juan para que no se puedan borrar
+// juan.name = "Juan";
+
+// juan["age"] = 18;
+
+Object.defineProperty(juan, "name", {
+    value: "Juanito",
+    configurable: false,
+});
+*/
+//Object.isSealed(juan); no dice si juan esta "sellado", nos devuelve true o false según corresponda también existe el método Object.isFrozen();
+
+function requiredParam(param){
+    throw new Error(param + " este parámetro es obligatorio");
+}
+
+
+ function createStudent({
+     name = requiredParam("name"), /*en vez de poner "name = name," ponemos solo "name,"*/
+     age,
+     email = requiredParam("email"),
+     twitter,
+     instagram,
+     facebook,
+     approvedCourses = [], //por defecto array vacío
+     learningPaths = [],
+ } = {}){ //así le decimos que el parametro que va a recibir esta función por defecto es un objeto
+    return {
+        name,
+        age,
+        email,
+        approvedCourses,
+        learningPaths,
+        socialMedia: {
+            twitter,
+            instagram,
+            facebook,
+        }
+    };
+ };
+
+ const juan = createStudent({
+    name: "Juanito",
+    email: "juandc@gmail.com",
+    age: 18,
+    twitter: "@juandc"
+
+ });
+
+ const pedro = createStudent();
