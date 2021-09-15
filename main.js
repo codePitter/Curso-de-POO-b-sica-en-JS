@@ -53,3 +53,76 @@ console.log(Object.getOwnPropertyDescriptors(juan));
 console.log(Object.getOwnPropertyDescriptors(juan));
 console.log(juan);
 */
+// const obj1 = {
+//     a: "a",
+//     b: "b",
+//     c: {
+//         d: "d",
+//         c: "c",
+//     }
+// };
+
+// const obj2 = {};
+
+// for (prop in obj1){
+//     obj2[prop] = obj1[prop];
+// }
+
+/* funciona bien hasta que aparece un objeto dentro de objeto
+Al modificar el objeto c, d se van a modificar ambos obj
+*/
+
+//const obj3 = Object.assign({}, obj1);
+/*
+en este caso al vambiar el origen cambia la copia
+*/
+
+//const obj4 = Object.create(obj1);
+/*
+crea el objeto 4 con la propiedades del obj1 pero dentro de proto
+al asignarle otro valor a "a:" se crea una nueva propiedad a: con el nuevo valor pero quedan los 2 
+
+//a: "nuevo valor"
+    __proto__:
+        a: "a"
+
+agrega "a: 'nuevo valor'" como si fuera un nuevo valor manteniendo las propiedades heredadas de obj1
+
+al modificar un objeto dentro de un objeto en el original tambièn afecta el __proto__ heredado
+*/
+
+//******** JSON.parse y JSON.stringify ********
+
+//const obj2 = JSON.stringify(obj1);
+
+// {"a":"a","b":"b","c":{"d":"d","c":"c"}} crea un string del obj1
+
+/*
+const stringifyComplexObj = JSON.stringify(obj1);
+
+const obj2 = JSON.parse(stringifyComplexObj);
+
+ convierte el string creado en un objeto
+{a: 'a', b: 'b', c: {…}}
+    a: "a"  
+    b: "b"
+    c: {d: 'd', c: 'c'}
+    [[Prototype]]: Object
+*/
+
+/*
+function recursica(param){
+    console.log(param);
+    if(validacion){
+        //llamados recursivos
+    } else {
+        //llamados normales
+    }
+}
+*/
+let numeritos = [0,1,2,3,4,5,6,7,8,9,23,15];
+let numerito = 0;
+
+for (let index = 0; index < numeritos.length; index++){
+    console.log({ index, numerito });
+}
